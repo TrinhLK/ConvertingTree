@@ -1,0 +1,12 @@
+<?xml version="1.0"  encoding="iso-8859-1"?>
+<country>
+     <name>n  </name>
+     <city>c  </city>
+     <region>
+         <name>n  </name>
+         <population>p  </population>
+         <city> Lille </city>
+     </region>
+     <region>
+     </region>
+</country>
