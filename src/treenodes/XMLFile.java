@@ -16,20 +16,36 @@ public class XMLFile {
 	private ArrayList<BTNode> listBiMethods = new ArrayList<BTNode>();
 	private ArrayList<String> listTreeMethodsString = new ArrayList<String>();
 	private ArrayList<String> listMethodsString = new ArrayList<String>();
+	private ArrayList<ArrayList<String>> listMethodsSequenceString = new ArrayList<ArrayList<String>>();
+	
 	
 	public static void main(String[] args) {
 		XMLFile file = new XMLFile();
 		
 		file.readXMLFile("MethodBody-0-1.xml");
 		//file.readXMLFile("inputAST.xml");
+		//Chuyen cay AST thanh sequence theo pre-order va luu vao arraylist
 		for (int i=0 ; i<file.listMethods.size() ; i++) {
-			file.listBiMethods.add(new BTNode(file.listMethods.get(i)));
+			//file.listBiMethods.add(new BTNode(file.listMethods.get(i), 1));
+			ArrayList<String> temp = new ArrayList<String>();
+			temp = file.listMethods.get(i).getSentence(temp);
+			file.listMethodsSequenceString.add(temp);
 		}
+		
+		//doc tung sequence, cho vao arraylist 2-tree
+		for (int i=0 ; i<file.listMethodsSequenceString.size() ; i++) {
+			BTNode temp = new BTNode(file.listMethodsSequenceString.get(i), 0);
+			file.listBiMethods.add(temp);
+		}
+		//file.listBiMethods.add(new BTNode(file.listMethods.get(1), 1));
 		System.out.println("PRINTING Gen TREE");
-		file.listMethods.get(2).printTree("   ");
+		file.listMethods.get(1).printTree("   ");
+		
+		System.out.println("PRINTING Gen SEQUENCE");
+		System.out.println(file.listMethodsSequenceString.get(1));
 		
 		System.out.println("PRINTING Binary TREE");
-		file.listBiMethods.get(2).printTree("   ");
+		file.listBiMethods.get(1).printTree("   ");
 		
 		String rs = "";
 		for (int i = 0 ; i < file.listBiMethods.size() ; i++) {

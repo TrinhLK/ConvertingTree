@@ -30,6 +30,15 @@ public class TNode<T> {
 	}
 	
 	public int getInterator() {
+//		if (this.parent != null) {
+//			for (int i=0 ; i <this.parent.getChildren().size() ; i++) {
+//				if (this.parent.getChildren().get(i).getInfor().equals(this.infor)) {
+//					iterator = i;
+//					return iterator;
+//				}
+//			}
+//		}
+//		return -1;
 		return iterator;
 	}
 
@@ -78,6 +87,32 @@ public class TNode<T> {
 		
 	}
 	
+	public ArrayList<String> getSentence(ArrayList<String> indent) {
+		
+		if (children.size() > 0) {
+			//this.infor = this.getName();
+			String temp = (String) this.getName();
+			temp = temp.replace("<", "");
+			temp = temp.replace(">", "");
+			this.infor = (T) temp;
+			//System.out.println(indent + infor);
+			indent.add((String) infor);
+			for (int i = 0 ; i < children.size() ; i++) {
+				children.get(i).getSentence(indent);
+				
+			}
+		}else {
+			String temp = (String) this.getData();
+			temp = temp.replace("<", "");
+			temp = temp.replace(">", "");
+			this.infor = (T) temp;
+			indent.add((String) infor);
+			//System.out.println(indent + infor);
+		}
+		
+		return indent;
+	}
+
 	public void assignInfor() {
 		
 		if (children.size() > 0) {
